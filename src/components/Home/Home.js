@@ -1,35 +1,40 @@
 import React from 'react';
 import './Home.css';
-import Profile from "./../Profile/Profile";
+import Profile from "../Content/Profile/Profile";
 import Login from "./../Authentication/Login";
-import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
+import Header from "../Header";
 
 
-function AppRouter() {
-  return (
-    
-    <Router>
-    <div className="home">
-    <Route path="/" component={Home} />
-    <Route path="/login" component={Login} />
-    <Route path="/profile" component={Profile} />
+class AppRouter extends React.Component {
+    constructor(props) {
+        super(props)
 
-    </div>
-    </Router>
-  );
+
+    }
+
+    render() {
+        return (
+
+            <Router>
+                <div style={{color: "black", height: "300px", backgroundColor: "red"}}>
+                    <Route path="/" component={Home}/>
+                    <Route path="/login" exact component={Login}/>
+                    <Route path="/profile" component={Profile}/>
+                </div>
+            </Router>
+        );
+    }
 }
+
 
 function Home() {
-  return (
-    <div className="home-router">
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/profile">Profile</Link>
-    </div>
-  );
+    return (
+        <div className="home">
+            <Header/>
+        </div>
+    );
 }
-
-
 
 
 export default AppRouter;
