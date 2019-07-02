@@ -1,10 +1,24 @@
 .home {
   position: relative;
   width: 80%;
-  height: 700px;
   background-color: cornflowerblue;
-  margin: 20px auto 20px auto;
+  margin: 20px auto 0px auto;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 10% 1fr;
+  grid-template-columns: 1fr;
+  height: 300px;
+
+}
+
+.home-router {
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
+
+  
+
+}
+
+.test {
+  height: 100px;
+  background-color: rgb(88, 46, 46);
 }
