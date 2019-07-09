@@ -1,9 +1,10 @@
 import React from 'react';
 import './Home.css';
 import Profile from "../Content/Profile/Profile";
-import Login from "./../Authentication/Login";
-import { BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
+import {News} from "../Content/News/News";
+import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
 import Header from "../Header";
+
 
 
 class AppRouter extends React.Component {
@@ -17,9 +18,9 @@ class AppRouter extends React.Component {
         return (
 
             <Router>
-                <div style={{color: "black", height: "300px", backgroundColor: "red"}}>
-                    <Route path="/" component={Home}/>
-                    <Route path="/login" exact component={Login}/>
+                <div style={{color: "black", height: "300px", backgroundColor: "grey"}}>
+                    <Route path="/" component={Home} />
+                    <Route path="/news" component={News}/>
                     <Route path="/profile" component={Profile}/>
                 </div>
             </Router>
