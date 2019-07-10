@@ -2,17 +2,13 @@
 
   width: 80%;
   background-color: cornflowerblue;
-  margin: 20px auto 0px auto;
+  margin: 20px auto 0 auto;
   display: grid;
   grid-template-rows: 10% 1fr;
-
-
 }
 
 .home-router {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
-  
 
 }
