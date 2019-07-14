@@ -2,3 +2,22 @@
     display: grid;
     justify-content: center;
 }
+
+.icon-svg {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 3px;
+    fill: white;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    background-color: #4a739a;
+    stroke-width: 0;
+    transition: background-color 1s, color 1s;
+}
+
+.icon-svg:hover {
+    background-color: #6f98bf;
+    fill: black;
+}

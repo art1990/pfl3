@@ -3,17 +3,20 @@ import "./SignIn.css";
 import {history, checkLocalStorage} from "./../../Home/Home";
 
 
+
 class SignIn extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             username: ["admin", ""],
-            password: [12345, ""],
-            login: false          
+            password: [12, ""],
+            login: false,
+            render: true
         };
-        this.handleUsernameChange = this.handleUsernameChange.bind(this)
-        this.handlePasswordChange = this.handlePasswordChange.bind(this)
-        this.signIn = this.signIn.bind(this)
+        this.handleUsernameChange = this.handleUsernameChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.signIn = this.signIn.bind(this);
+        this.renderFalse = this.renderFalse.bind(this)
     }
 
     handleUsernameChange(e) {
@@ -32,55 +35,66 @@ class SignIn extends React.Component{
         }
     }
 
-    signIn() {
-        console.log(history)
-        if(!localStorage.getItem("isAutentificated")) {
-        localStorage.setItem("isAutentificated", this.state.username[1] && this.state.password[1])
-        if (checkLocalStorage()) {
-            history.push("/login")
-         }
-        } else {
-            localStorage.isAutentificated = this.state.username[1] && this.state.password[1];
-            if (checkLocalStorage) {
-            history.push("/login")
+    renderFalse() {
+        this.setState(() => {
+            return {
+                render: false
             }
+        })
+    }
+
+    signIn() {
+        if(!localStorage.getItem("isAuthenticated")) {
+        localStorage.setItem("isAuthenticated", this.state.username[1] && this.state.password[1])
+        if (checkLocalStorage()) {
+            history.push("/profile");
+         } else {this.renderFalse()}
+        } else {
+            localStorage.isAuthenticated = this.state.username[1] && this.state.password[1];
+            if (checkLocalStorage()) {
+                history.push("/profile");
+            } else {this.renderFalse()}
         }
     }
 
-
     render() {
-        return (
-            <form>
-                <div className="sign-in">
+        const signInForm =  (<form>
+            <div className="sign-in">
                 <h2>Please sign in</h2>
+            </div>
+            <div className="form-group row sign-in">
+                <div className="col-sm-2 col-form-label">
+                    <label className="" htmlFor="username">Username</label>
                 </div>
-                <div className="form-group row sign-in">
-                    <div className="col-sm-2 col-form-label">
-                        <label className="" htmlFor="username">Username</label>
-                    </div>
-                    <div className="col-sm-4">
-                        <input onChange={this.handleUsernameChange} className="form-control" id="username" type="text" placeholder="username" required autoFocus />
-                    </div>
+                <div className="col-sm-4">
+                    <input onChange={this.handleUsernameChange} className="form-control" id="username" type="text" placeholder="username" required autoFocus />
                 </div>
-                <div className="form-group row sign-in">
-                    <div className="col-sm-2 col-form-label">
-                        <label htmlFor="input-password">Password</label>
-                    </div>
-                    <div className="col-sm-4">
-                        <input onChange={this.handlePasswordChange} className="form-control" type="password" id="input-password" placeholder="password" required />
-                    </div>
-
+            </div>
+            <div className="form-group row sign-in">
+                <div className="col-sm-2 col-form-label">
+                    <label htmlFor="input-password">Password</label>
                 </div>
-                <div className="row sign-in">
-                    <div className="col-sm-6" >
-                        <button onClick={this.signIn} type="button" className="btn-lg btn-primary btn-block"> Sign in</button>
-                    </div>
+                <div className="col-sm-4">
+                    <input onChange={this.handlePasswordChange} className="form-control" type="password" id="input-password" placeholder="password" required />
                 </div>
-
-            </form>
+            </div>
+            <div className="row sign-in">
+                <div className="col-sm-6" >
+                    <button onClick={this.signIn} type="button" className="btn-lg btn-primary btn-block"> Sign in</button>
+                </div>
+            </div>
+        </form>);
+        return (
+           <div>
+               {!this.state.render && <h1>Имя пользователя или пароль неверен!!!</h1>}
+               {signInForm}
+           </div>
         );
     }
 
 }
+
+
+
 
 export default SignIn;
